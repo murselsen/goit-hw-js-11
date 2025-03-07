@@ -1,7 +1,7 @@
 {
   "name": "vanilla-app-template",
   "private": true,
-  "version": "1.0.192",
+  "version": "1.0.258",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -19,6 +19,7 @@
   "dependencies": {
     "axios": "^1.8.2",
     "izitoast": "^1.4.0",
+    "simplelightbox": "^2.14.3",
     "vite-plugin-full-reload": "^1.2.0",
     "vite-plugin-html-inject": "^1.1.2"
   }
