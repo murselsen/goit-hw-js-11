@@ -12,17 +12,48 @@
   align-items: center;
   gap: 36px;
 }
-
+.app-form {
+  display: flex;
+  gap: 8px;
+}
 .app-form input[type='text'] {
   width: 272px;
   height: 40px;
   border: 1px solid rgba(128, 128, 128, 1);
   border-radius: 4px;
   padding: 8px 16px;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 4%;
+  color: rgba(128, 128, 128, 1);
 }
-.app-form input[type='text']:hover{
-  background: rgba(128, 128, 128, 1);
+.app-form input[type='text']:hover {
+  border: 1px solid rgba(0, 0, 0, 1);
+}
 
+.app-form input[type='text']:focus {
+  outline: none;
+  border: 1px solid rgba(78, 117, 255, 1);
+  color: rgba(46, 47, 66, 1);
+}
+
+.app-form input[type='submit'] {
+  background: rgba(78, 117, 255, 1);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 4%;
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+.app-form input[type='submit']:hover{
 }
 
 .app-gallery {
