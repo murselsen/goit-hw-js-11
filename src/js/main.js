@@ -100,36 +100,63 @@ const galleryItem = photoInfo => {
 form.addEventListener('submit', async e => {
   e.preventDefault();
   galleryList.innerHTML = '';
-  const search = e.target.elements.search.value.trim();
-  axios
-    .get('https://pixabay.com/api/', {
-      params: {
-        key: '21250106-0015933422f1e636de5f184b8',
-        q: search,
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: true,
-      },
-    })
-    .then(response => {
-      console.log("Pixabay'den gelen veri", response);
-      const photos = response.data.hits;
-      if (photos.length === 0) {
-        iziToast.error({
-          title: 'Veri Bulunamadı',
-          message: 'Illegal operation',
-        });
-      } else {
-        photos.forEach(photo => {
-          galleryItem(photo);
-        });
-        new SimpleLightbox('.gallery li > a', {
-          captionsData: 'alt',
-          captionDelay: 350,
-        });
-      }
-    })
-    .catch(error => {
-      console.error("Pixabay'den gelen Hata", error);
+  const search = e.target.elements.search.value;
+  if (search === '') {
+    iziToast.warning({
+      position: 'topRight',
+      message: 'Please enter a valid search query!',
     });
+    return false;
+  } else {
+    const item = document.createElement('li');
+    item.classList.add('gallery-item');
+
+    const itemLoader = document.createElement('span');
+    itemLoader.classList.add('loader') = 'Loading images, plaese wait...';
+
+    item.appendChild(itemP);
+    item.style.textAlign = 'center';
+    item.style.border = 'none';
+    galleryList.appendChild(item);
+
+    axios
+      .get('https://pixabay.com/apis/', {
+        params: {
+          key: '21250106-0015933422f1e636de5f184b8',
+          q: search,
+          image_type: 'photo',
+          orientation: 'horizontal',
+          safesearch: true,
+        },
+      })
+      .then(response => {
+        const photos = response.data.hits;
+        galleryList.innerHTML = '';
+        if (photos.length === 0) {
+          iziToast.error({
+            position: 'topRight',
+            color: 'red',
+            message:
+              'Sorry, there are no images matching your search query. Please try again!',
+          });
+        } else {
+          photos.forEach(photo => {
+            galleryItem(photo);
+          });
+          new SimpleLightbox('.gallery li > a', {
+            captionsData: 'alt',
+            captionDelay: 350,
+          });
+        }
+      })
+      .catch(error => {
+        iziToast.error({
+          position: 'topRight',
+          color: 'red',
+          message: error.message,
+        });
+        galleryList.innerHTML = '';
+        console.error("Pixabay'den gelen Hata", error);
+      });
+  }
 });
