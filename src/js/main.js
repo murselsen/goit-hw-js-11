@@ -97,6 +97,11 @@ const galleryItem = photoInfo => {
   galleryList.appendChild(item);
 };
 
+ let galleryBox = new SimpleLightbox('.gallery li > a', {
+            captionsData: 'alt',
+            captionDelay: 350,
+          })
+
 form.addEventListener('submit', async e => {
   e.preventDefault();
   galleryList.innerHTML = '';
@@ -112,15 +117,15 @@ form.addEventListener('submit', async e => {
     item.classList.add('gallery-item');
 
     const itemLoader = document.createElement('span');
-    itemLoader.classList.add('loader') = 'Loading images, plaese wait...';
+    itemLoader.classList.add('loader');
 
-    item.appendChild(itemP);
+    item.appendChild(itemLoader);
     item.style.textAlign = 'center';
     item.style.border = 'none';
     galleryList.appendChild(item);
 
     axios
-      .get('https://pixabay.com/apis/', {
+      .get('https://pixabay.com/api/', {
         params: {
           key: '21250106-0015933422f1e636de5f184b8',
           q: search,
@@ -143,10 +148,7 @@ form.addEventListener('submit', async e => {
           photos.forEach(photo => {
             galleryItem(photo);
           });
-          new SimpleLightbox('.gallery li > a', {
-            captionsData: 'alt',
-            captionDelay: 350,
-          });
+         galleryBox.refresh();
         }
       })
       .catch(error => {
@@ -158,5 +160,6 @@ form.addEventListener('submit', async e => {
         galleryList.innerHTML = '';
         console.error("Pixabay'den gelen Hata", error);
       });
+    e.target.reset();
   }
 });
