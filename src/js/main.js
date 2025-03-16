@@ -97,10 +97,10 @@ const galleryItem = photoInfo => {
   galleryList.appendChild(item);
 };
 
- let galleryBox = new SimpleLightbox('.gallery li > a', {
-            captionsData: 'alt',
-            captionDelay: 350,
-          })
+let galleryBox = new SimpleLightbox('.gallery li > a', {
+  captionsData: 'alt',
+  captionDelay: 350,
+});
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
@@ -148,7 +148,7 @@ form.addEventListener('submit', async e => {
           photos.forEach(photo => {
             galleryItem(photo);
           });
-         galleryBox.refresh();
+          galleryBox.refresh();
         }
       })
       .catch(error => {
