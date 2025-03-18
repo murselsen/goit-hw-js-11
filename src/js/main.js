@@ -14,7 +14,7 @@ const galleryList = document.querySelector('#galleryList');
 const galleryItem = photoInfo => {
   const item = document.createElement('li');
   item.classList.add('gallery-item');
-  item.dataset.source = photoInfo.largeImageURL;
+  // item.dataset.source = photoInfo.largeImageURL;
 
   const itemLink = document.createElement('a');
   itemLink.href = photoInfo.largeImageURL;
@@ -131,7 +131,7 @@ form.addEventListener('submit', async e => {
           q: search,
           image_type: 'photo',
           orientation: 'horizontal',
-          safesearch: true,
+          // safesearch: true,
         },
       })
       .then(response => {
